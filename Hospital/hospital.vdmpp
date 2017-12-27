@@ -1,0 +1,15 @@
+class hospital
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+public name:  seq of char;
+public Doctors: seq of doctor := [];
+operations
+-- TODO Define operations here
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end hospital
