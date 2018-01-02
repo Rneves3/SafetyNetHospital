@@ -11,8 +11,12 @@ public clientName : seq of char;
 
 operations
 
-public Appointment: seq of char ==> Appointment
-Appointment(cN) == (clientName := cN; return self);
+public Appointment: seq of char * seq of char * seq of char ==> Appointment
+Appointment(d, t, cN) == (
+date := d;
+time := t;
+clientName := cN;
+return self);
 
 public addDate: seq of char ==> ()
 addDate(d) == date := d

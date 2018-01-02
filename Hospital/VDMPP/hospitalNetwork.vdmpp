@@ -8,6 +8,9 @@ public doctors: set of Doctor := {};
 public appointments: set of Appointment := {};
 operations
 
+public hospitalNetwork: () ==> hospitalNetwork
+hospitalNetwork() == return self;
+
 public getHospitals: () ==> set of Hospital
 getHospitals() == return hospitals;
 
@@ -32,6 +35,37 @@ addAppointments(a) == appointments := appointments union{a}
 pre a not in set appointments
 post appointments = appointments~ union {a};
 
+public getDocsMultipleHospitals: () ==> set of Doctor
+getDocsMultipleHospitals()==(
+		dcl docs: set of set of Doctor:= {};
+		dcl result: set of Doctor:= {};
+		dcl intersect: set of Doctor:= {};
+		for all h in set hospitals do ( -- for each hospital
+				docs:= docs union {h.doctors}; 
+			); 
+			for all setDocs in set docs do ( -- for each hospital
+				intersect:= {};
+				for all setDocsPrime in set docs\{setDocs} do (
+					intersect:= setDocs inter setDocsPrime;
+					if intersect <> {} then result:= result union intersect;
+				);  
+			); 
+			return result;
+		);
+		
+--public getHospitalMostAppointments: ()  ==> Hospital
+--	getHospitalMostAppointments() == (
+	
+	--dcl result: Hospital;
+	--dcl max: nat := 0;
+	
+	--for all h in set hospitals
+	--do (if(h.getNAppoints() > max) then max = h.getNAppoints()
+	--);
+	
+	--)
+	
+		
 functions
 -- TODO Define functiones here
 traces

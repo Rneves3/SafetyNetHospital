@@ -8,6 +8,7 @@ public name:  seq of char;
 public doctors: set of Doctor := {};
 public appointments: set of Appointment := {};
 public nDoctors: real := 0;
+public nAppoints: nat := 0;
 
 inv nDoctors <= 20;
 operations
@@ -21,6 +22,9 @@ getName() == return name;
 public getDoctors: () ==> set of Doctor
 getDoctors() == return doctors;
 
+public getNAppoints: () ==> nat
+getNAppoints() == return nAppoints;
+
 public getAppointments: () ==> set of Appointment
 getAppointments() == return appointments;
 
@@ -33,7 +37,8 @@ and nDoctors = nDoctors~ + 1;
 public addAppointments: Appointment ==> ()
 addAppointments(a) == appointments := appointments union{a}
 pre a not in set appointments
-post appointments = appointments~ union {a};
+post appointments = appointments~ union {a}
+and nAppoints = nAppoints~ + 1;
 
 functions
 -- TODO Define functiones here
