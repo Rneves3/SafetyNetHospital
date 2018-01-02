@@ -1,0 +1,40 @@
+class Appointment
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+
+public date : seq of char;
+public time : seq of char;
+public clientName : seq of char;
+
+operations
+
+public Appointment: seq of char ==> Appointment
+Appointment(cN) == (clientName := cN; return self);
+
+public addDate: seq of char ==> ()
+addDate(d) == date := d
+pre d <> date
+post date = d;
+
+public addTime: seq of char ==> ()
+addTime(t) == time := t
+pre t <> time
+post time = t;
+
+public getDate : () ==> seq of char
+getDate() == return date;
+
+public getTime : () ==> seq of char
+getTime() == return time;
+
+public getClientName : () ==> seq of char
+getClientName() == return clientName;
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Appointment

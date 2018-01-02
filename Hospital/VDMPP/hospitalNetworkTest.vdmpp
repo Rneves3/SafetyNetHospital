@@ -1,0 +1,30 @@
+class hospitalNetworkTest
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+
+doctor1 : Doctor := new Doctor("Ricardo");
+doctor2 : Doctor := new Doctor("Joana");
+doctor3 : Doctor := new Doctor("Jose");
+
+hospital1 : Hospital := new Hospital("S.Jon");
+hospital2 : Hospital := new Hospital("S.Jose");
+hospital3 : Hospital := new Hospital("CUF");
+hospital4 : Hospital := new Hospital("Coimbra");
+hospital5 : Hospital := new Hospital("S.Maria");
+hospital6 : Hospital := new Hospital("Arrabida");
+
+appointment1 : Appointment := new Appointment("Ernesto");
+appointment2 : Appointment := new Appointment("Amélia");
+appointment3 : Appointment := new Appointment("Gertrudes");
+appointment4 : Appointment := new Appointment("Arnaldo");
+
+operations
+-- TODO Define operations here
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end hospitalNetworkTest

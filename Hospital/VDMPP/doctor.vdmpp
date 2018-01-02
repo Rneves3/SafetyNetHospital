@@ -1,0 +1,40 @@
+class Doctor
+types
+values
+-- TODO Define values here
+instance variables
+public name:  seq of char;
+public hospitals: set of Hospital := {};
+public appointments: set of Appointment :={};
+public nHospitals: real := 0;
+
+inv nHospitals <= 3;
+operations
+
+public Doctor: seq of char ==> Doctor
+Doctor(d) == (name := d; return self);
+
+public getName : () ==> seq of char
+getName() == return name;
+
+public getHospitals: () ==> set of Hospital
+getHospitals() == return hospitals;
+
+public getAppointments: () ==> set of Appointment
+getAppointments() == return appointments;
+
+public addHospital: Hospital ==> ()
+addHospital(h) == hospitals := hospitals union{h}
+pre h not in set hospitals and nHospitals <= 3
+post hospitals = hospitals~ union {h}
+and nHospitals = nHospitals~ + 1;
+
+public addAppointments: Appointment ==> ()
+addAppointments(a) == appointments := appointments union{a}
+pre a not in set appointments
+post appointments = appointments~ union {a};
+
+functions
+traces
+-- TODO Define Combinatorial Test Traces here
+end Doctor

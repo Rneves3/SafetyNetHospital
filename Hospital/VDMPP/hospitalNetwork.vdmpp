@@ -1,0 +1,39 @@
+class hospitalNetwork
+types
+values
+-- TODO Define values here
+instance variables
+public hospitals: set of Hospital := {};
+public doctors: set of Doctor := {};
+public appointments: set of Appointment := {};
+operations
+
+public getHospitals: () ==> set of Hospital
+getHospitals() == return hospitals;
+
+public getDoctors: () ==> set of Doctor
+getDoctors() == return doctors;
+
+public getAppointments: () ==> set of Appointment
+getAppointments() == return appointments;
+
+public addDoctors: Doctor ==> ()
+addDoctors(d) == doctors := doctors union{d}
+pre d not in set doctors
+post doctors = doctors~ union {d};
+
+public addHospital: Hospital ==> ()
+addHospital(h) == hospitals := hospitals union{h}
+pre h not in set hospitals
+post hospitals = hospitals~ union {h};
+
+public addAppointments: Appointment ==> ()
+addAppointments(a) == appointments := appointments union{a}
+pre a not in set appointments
+post appointments = appointments~ union {a};
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end hospitalNetwork

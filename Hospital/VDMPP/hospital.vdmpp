@@ -1,0 +1,42 @@
+class Hospital
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+public name:  seq of char;
+public doctors: set of Doctor := {};
+public appointments: set of Appointment := {};
+public nDoctors: real := 0;
+
+inv nDoctors <= 20;
+operations
+
+public Hospital: seq of char ==> Hospital
+Hospital(h) == (name := h; return self);
+
+public getName : () ==> seq of char
+getName() == return name;
+
+public getDoctors: () ==> set of Doctor
+getDoctors() == return doctors;
+
+public getAppointments: () ==> set of Appointment
+getAppointments() == return appointments;
+
+public addDoctors: Doctor ==> ()
+addDoctors(d) == doctors := doctors union{d}
+pre d not in set doctors and nDoctors <= 20
+post doctors = doctors~ union {d}
+and nDoctors = nDoctors~ + 1;
+
+public addAppointments: Appointment ==> ()
+addAppointments(a) == appointments := appointments union{a}
+pre a not in set appointments
+post appointments = appointments~ union {a};
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Hospital
