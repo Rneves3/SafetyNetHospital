@@ -1,19 +1,23 @@
-class doctor
+class Doctor
 types
+	public DoctorName = seq1 of char; -- fullname
+	-- public DoctorSpecialty = seq1 of char;
+	
 values
 -- TODO Define values here
+
 instance variables
-public name:  seq of char;
-public hospitals: seq of hospital := [];
+	public name: DoctorName;
+	-- public specialty: DoctorSpecialty;
+	
 operations
-public doctor: seq of char ==> doctor
-doctor(d) == (name := d; return self)
+	public Doctor : DoctorName ==> Doctor
+		Doctor(n) == (
+			name := n;
+			return self;
+		);
 functions
-public addHospital: h * hospitals -> hospitals
-addHospital(hospitals, h) == 
-if h in set dom hospitals then "Doctor already works in this hospital"
-else
-hospitals.push(h);
+-- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end doctor
+end Doctor

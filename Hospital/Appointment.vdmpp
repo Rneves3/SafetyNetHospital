@@ -1,0 +1,26 @@
+class Appointment
+types
+	public Date = Utils`Date;
+	--public Doctor = seq1 of char;
+	
+values
+-- TODO Define values here
+instance variables
+	public doctor: Doctor;
+	public date: Date;
+	--inv doctor <> nil;
+	--inv date <> nil;	
+	
+operations
+	public Appointment: Doctor * Date ==> Appointment
+		Appointment(doc,dateAp) == (
+			doctor:=doc;
+			date:=dateAp;
+			return self;
+		);
+			
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Appointment

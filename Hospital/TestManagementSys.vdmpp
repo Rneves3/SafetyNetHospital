@@ -1,0 +1,137 @@
+class TestManagementSys is subclass of MyTestCase
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+	-- main functionality
+	-- secondary
+	/********** HOSPITAL CLASS TESTS **********/ 
+	public testAddDoctor:() ==> ()
+		testAddDoctor() == (
+			dcl h1: Hospital := new Hospital("H.S.Joao");
+			dcl doc1: Doctor := new Doctor("Bela");
+			dcl doc2: Doctor := new Doctor("Bia");
+			dcl expected: map Doctor`DoctorName to Doctor
+				:= {"Bela"|->doc1};		
+			--dcl io: IO := new IO();
+			h1.addDoctor(doc1);
+			MyTestCase`assertEqual(expected,h1.doctors);
+			expected := expected munion {"Bia"|->doc2};
+			h1.addDoctor(doc2);
+			MyTestCase`assertEqual(expected,h1.doctors);
+	);
+	
+	public testAllDoctor:() ==> ()
+		testAllDoctor() == (
+			testAddDoctor();
+		);
+	
+	/********** MANAGEMENTSYS CLASS TESTS **********/
+	
+	/*private prepManagementSysTest:() ==> ()
+		prepManagementSysTest() ==(
+			dcl ms: ManagementSys := new ManagementSys();
+			dcl h1: Hospital := new Hospital("H.S.Joao");
+			dcl doc1: Doctor := new Doctor("Bela");
+			dcl doc2: Doctor := new Doctor("Bia");
+			dcl expected: set of Doctor := {doc1,doc2};
+			IO`println("configuring ManagementSys test");
+		);*/
+	
+	public testGetHospitalDocs:() ==> ()
+		testGetHospitalDocs() ==(
+			dcl ms: ManagementSys := new ManagementSys();
+			dcl h1: Hospital := new Hospital("H.S.Joao");
+			dcl doc1: Doctor := new Doctor("Bela");
+			dcl doc2: Doctor := new Doctor("Bia");
+			dcl expected: set of Doctor := {doc1,doc2};
+			
+			IO`println("running testGetHospitalDocs");
+			
+			h1.addDoctor(doc1);
+			h1.addDoctor(doc2);
+			
+			ms.hospitals := ms.hospitals munion {h1.name|->h1};
+			MyTestCase`assertEqual(expected,ms.getHospitalDocs(h1.name));
+		);
+	
+	public testGetDocsMultipleHospitals:() ==> ()
+		testGetDocsMultipleHospitals() ==(
+			dcl ms: ManagementSys := new ManagementSys();
+			dcl h1: Hospital := new Hospital("H.S.Joao");
+			dcl h2: Hospital := new Hospital("Sta. Maria");
+			dcl h3: Hospital := new Hospital("Agostinho Neto");
+			dcl doc1: Doctor := new Doctor("Bela");
+			dcl doc2: Doctor := new Doctor("Bia");
+			dcl doc3: Doctor := new Doctor("Eva");
+			dcl expected: set of Doctor := {doc3,doc1};
+			
+			IO`println("running testGetDocsMultipleHospitals");
+			
+			h1.addDoctor(doc1);
+			h1.addDoctor(doc2);
+			h2.addDoctor(doc1);
+			h3.addDoctor(doc3);
+			h2.addDoctor(doc3);
+			ms.hospitals := ms.hospitals munion {h1.name|->h1};
+			ms.hospitals := ms.hospitals munion {h2.name|->h2};
+			ms.hospitals := ms.hospitals munion {h3.name|->h3};
+			
+			MyTestCase`assertEqual(expected,ms.getDocsMultipleHospitals());
+		);
+	
+	public testGetHospitalMostAppointments:() ==> ()
+		testGetHospitalMostAppointments() == (
+			dcl ms: ManagementSys := new ManagementSys();
+			dcl h1: Hospital := new Hospital("H.S.Joao");
+			dcl h2: Hospital := new Hospital("Sta. Maria");
+			dcl h3: Hospital := new Hospital("Agostinho Neto");
+			dcl doc1: Doctor := new Doctor("Bela");
+			dcl doc2: Doctor := new Doctor("Bia");
+			dcl doc3: Doctor := new Doctor("Eva");
+			dcl expected: Hospital := h2;
+			
+			dcl d1: Utils`Date :=mk_Utils`Date(2017,12,31,17,6);
+			dcl d2: Utils`Date :=mk_Utils`Date(2016,12,31,17,6);
+			dcl d3: Utils`Date :=mk_Utils`Date(2015,12,31,17,6);
+			dcl d4: Utils`Date :=mk_Utils`Date(2014,12,31,17,6);
+			
+			IO`println("running testGetHospitalMostAppointments");
+			
+			h1.addDoctor(doc1);
+			h1.addDoctor(doc2);
+			h2.addDoctor(doc1);
+			h3.addDoctor(doc3);
+			h2.addDoctor(doc3);
+			ms.hospitals := ms.hospitals munion {h1.name|->h1};
+			ms.hospitals := ms.hospitals munion {h2.name|->h2};
+			ms.hospitals := ms.hospitals munion {h3.name|->h3};
+			
+			ms.TestThis(doc1,h1,d1);
+			ms.TestThis(doc1,h2,d2);
+			ms.TestThis(doc2,h2,d3);
+			ms.TestThis(doc3,h2,d4);
+			MyTestCase`assertEqual(expected,ms.getHospitalMostAppointments());
+		);
+	
+	public testAllManagementSys:() ==> ()
+		testAllManagementSys() == (
+			testGetHospitalDocs();
+			testGetDocsMultipleHospitals();
+			testGetHospitalMostAppointments();
+		);
+		
+	public testAll:() ==> ()
+		testAll() == (
+			testAllDoctor();
+			testAllManagementSys();
+		);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end TestManagementSys

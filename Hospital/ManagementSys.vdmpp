@@ -1,0 +1,96 @@
+class ManagementSys
+types
+	public Date = Utils`Date;
+	public HospitalName = Hospital`HospitalName; 
+
+values
+-- TODO Define values here
+instance variables
+	-- hospitals set
+	public hospitals : map HospitalName to Hospital  := {|->};
+	-- doctors set
+	public doctors : set of Doctor := {};
+	-- appointments map
+	public appointments : map Hospital to set of Appointment := {|->} ; -- appointment: doctor, time
+
+operations
+	public ManagementSys: () ==> ManagementSys
+		ManagementSys() == return self;
+		
+	public AddAppointmentt: Hospital * Doctor * Date ==> bool
+		AddAppointmentt(h,doc,date) == (
+			-- TODO: check if doctor is free, check if Hospital in hospitals
+			--if h in dom appointments then
+			appointments(h) := appointments(h) union {new Appointment(doc,date)};
+			return true;
+			 --appointments :=appointments munion {h |-> new Appointment(doc,date)};
+		);
+		
+	public TestThis2: () ==> ()
+		TestThis2() == doctors := doctors union {new Doctor("Test")};
+		
+	public TestThis: Doctor * Hospital * Date==> ()
+		TestThis(d,h,da) == (
+			--doctors := doctors union {d};
+			--hospitals := hospitals union {h};
+			if h not in set dom appointments then (
+				appointments := appointments munion {h|->{new Appointment(d,da)}};
+			)
+			else appointments(h) := appointments(h) union {new Appointment(d,da)};
+			--appointments := appointments munion {h|->{new Appointment(d,da)}};
+		);
+	public getHospital: HospitalName ==> Hospital
+		getHospital(name)==(
+			return hospitals(name);
+		);
+	
+	public getHospitalDocs: HospitalName ==> set of Doctor
+		getHospitalDocs(name) == (
+			return rng hospitals(name).doctors;
+		)
+		pre name in set dom hospitals;	
+	
+	public getDocsMultipleHospitals: () ==> set of Doctor
+		getDocsMultipleHospitals()==(
+			dcl docs: set of set of Doctor:= {};
+			dcl result: set of Doctor:= {};
+			dcl intersect: set of Doctor:= {};
+			for all h in set rng hospitals do ( -- for each hospital
+				docs:= docs union {rng h.doctors}; 
+			); 
+			for all setDocs in set docs do ( -- for each hospital
+				intersect:= {};
+				for all setDocsPrime in set docs\{setDocs} do (
+					intersect:= setDocs inter setDocsPrime;
+					if intersect <> {} then result:= result union intersect;
+				);  
+			); 
+			return result;
+		);
+		
+	public getHospitalMostAppointments: () ==> Hospital	
+		getHospitalMostAppointments()==(
+			dcl hosp: Hospital;
+			dcl max: nat := 0;
+			
+			for all h in set dom appointments do (
+				if card appointments(h) > max then (
+					hosp := h;
+					max := card appointments(h);
+				);
+			);
+			return hosp;
+		);
+functions
+	public hasHospital: seq1 of char * set of Hospital -> bool
+		hasHospital(name,hospitals)== exists h in set hospitals & h.name=name;
+	
+	/*public getHospital: seq1 of char * set of Hospital -> Hospital
+		getHospital(name,hospitals)==
+			let s  = {h | h in set hospitals & h.name=name}
+			in hd(s);*/
+		
+		
+traces
+-- TODO Define Combinatorial Test Traces here
+end ManagementSys

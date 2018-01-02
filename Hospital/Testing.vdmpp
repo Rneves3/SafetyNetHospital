@@ -1,0 +1,42 @@
+class Testing
+types
+	
+values
+-- TODO Define values here
+instance variables
+	--a1: Appointment := new Appointment(Appointment`Date(2017,12,31,17,6),"Bela");
+	d1: Utils`Date :=mk_Utils`Date(2017,12,31,17,6);
+	doc1: Doctor := new Doctor("Bela");
+	doc2: Doctor := new Doctor("Momo");
+	a1: Appointment := new Appointment(doc1,d1);
+	h1: Hospital := new Hospital("A.Neto");
+	ms: ManagementSys := new ManagementSys();
+	
+operations
+	public Run: () ==> nat1 * nat1 * nat1 * seq1 of char * map seq1 of char to Doctor
+		* set of Doctor * set of Hospital * map Hospital to set of Appointment
+		Run() ==(
+			h1.addDoctor(doc1);
+			h1.addDoctor(doc2);
+			--ms.AddAppointmentt(h1,a1);
+			ms.TestThis(doc2,h1,d1);
+			--h1.addDoctor(doc1);
+			let dia = d1.day, hora = d1.hour, min=d1.minute, docs=h1.doctors, med=doc1
+			in return mk_(dia,hora,min,med.name,docs,ms.doctors, rng ms.hospitals,ms.appointments
+			);			
+		);
+		
+	public Run2: () ==> set of Doctor
+		Run2() ==(
+			dcl h: Hospital;
+			h1.addDoctor(doc1);
+			h1.addDoctor(doc2);
+			ms.hospitals := ms.hospitals munion {"A.Neto"|->h1};
+			h := ms.getHospital("A.Neto");
+			return rng h.doctors;
+		);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Testing

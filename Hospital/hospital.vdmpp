@@ -1,15 +1,32 @@
-class hospital
+class Hospital
 types
--- TODO Define types here
+	public DoctorName = Doctor`DoctorName; -- fullname
+	public HospitalName = seq1 of char;
+	
 values
 -- TODO Define values here
+
 instance variables
-public name:  seq of char;
-public Doctors: seq of doctor := [];
+	public name : HospitalName;
+	public doctors : map DoctorName to Doctor := {|->};
+		-- inv not exists d1, d2 in doctors & d1.name=d2.name; it's map. No need
+	
 operations
--- TODO Define operations here
+	public Hospital : HospitalName ==> Hospital
+		Hospital(n) == (
+			name := n;
+			return self;
+		);
+		
+	public addDoctor : Doctor ==> ()
+		addDoctor(d) == (
+			doctors := doctors munion {d.name|->d};
+		)
+		pre d.name not in set dom doctors;
+
+	-- TODO getDoctor
 functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end hospital
+end Hospital
