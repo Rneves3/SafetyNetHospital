@@ -35,6 +35,12 @@ addAppointments(a) == appointments := appointments union{a}
 pre a not in set appointments
 post appointments = appointments~ union {a};
 
+public getHospitalDocs: Hospital ==> set of Doctor
+		getHospitalDocs(hosp) == (
+			return hosp.doctors;
+		)
+		pre hosp in set hospitals;	
+
 public getDocsMultipleHospitals: () ==> set of Doctor
 getDocsMultipleHospitals()==(
 		dcl docs: set of set of Doctor:= {};
