@@ -5,6 +5,6 @@
 		<stringAttribute key="LATEX_MAIN_DOCUMENT" value="Hospital.tex"/>
 		<booleanAttribute key="LATEX_MODEL_ONLY" value="true"/>
 		<booleanAttribute key="LATEX_MARK_COVERAGE" value="true"/>
-		<booleanAttribute key="LATEX_INCLUDE_COVERAGETABLE" value="false"/>
+		<booleanAttribute key="LATEX_INCLUDE_COVERAGETABLE" value="true"/>
 	</group>
 </overture>

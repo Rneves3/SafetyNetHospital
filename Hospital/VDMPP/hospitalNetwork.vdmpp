@@ -59,18 +59,19 @@ getDocsMultipleHospitals()==(
 			return result;
 		);
 		
---public getHospitalMostAppointments: ()  ==> Hospital
---	getHospitalMostAppointments() == (
-	
-	--dcl result: Hospital;
-	--dcl max: nat := 0;
-	
-	--for all h in set hospitals
-	--do (if(h.getNAppoints() > max) then max = h.getNAppoints()
-	--);
-	
-	--)
-	
+public getHospitalMostAppointments: () ==> Hospital	
+		getHospitalMostAppointments()==(
+			dcl hosp: Hospital;
+			dcl max: nat := 0;
+			
+			for all h in set hospitals do (
+				if card h.appointments > max then (
+					hosp := h;
+					max := card h.appointments;
+				);
+			);
+			return hosp;
+		);
 		
 functions
 -- TODO Define functiones here

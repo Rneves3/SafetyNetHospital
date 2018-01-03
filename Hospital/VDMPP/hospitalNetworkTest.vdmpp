@@ -114,11 +114,11 @@ operations
 			ms.hospitals := ms.hospitals union {h2};
 			ms.hospitals := ms.hospitals union {h3};
 			
-	--		ms.TestThis(doc1,h1,d1);
-	--		ms.TestThis(doc1,h2,d2);
-	--		ms.TestThis(doc2,h2,d3);
-	--		ms.TestThis(doc3,h2,d4);
-	--		MyTestCase`assertEqual(expected,ms.getHospitalMostAppointments());
+			h2.addAppointments(appointment1);
+			h2.addAppointments(appointment3);
+			h3.addAppointments(appointment2);
+			h1.addAppointments(appointment4);
+			MyTestCase`assertEqual(expected,ms.getHospitalMostAppointments());
 		);
 	
 	public testAllManagementSys:() ==> ()
