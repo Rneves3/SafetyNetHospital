@@ -26,8 +26,7 @@ getAppointments() == return appointments;
 public addHospital: Hospital ==> ()
 addHospital(h) == hospitals := hospitals union{h}
 pre h not in set hospitals and nHospitals <= 3
-post hospitals = hospitals~ union {h}
-and nHospitals = nHospitals~ + 1;
+post hospitals = hospitals~ union {h};
 
 public addAppointments: Appointment ==> ()
 addAppointments(a) == appointments := appointments union{a}

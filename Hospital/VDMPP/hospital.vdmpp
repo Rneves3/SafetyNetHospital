@@ -30,15 +30,13 @@ getAppointments() == return appointments;
 
 public addDoctors: Doctor ==> ()
 addDoctors(d) == doctors := doctors union{d}
-pre d not in set doctors and nDoctors <= 20
-post doctors = doctors~ union {d}
-and nDoctors = nDoctors~ + 1;
+pre d not in set doctors
+post doctors = doctors~ union {d};
 
 public addAppointments: Appointment ==> ()
 addAppointments(a) == appointments := appointments union{a}
 pre a not in set appointments
-post appointments = appointments~ union {a}
-and nAppoints = nAppoints~ + 1;
+post appointments = appointments~ union {a};
 
 functions
 -- TODO Define functiones here
